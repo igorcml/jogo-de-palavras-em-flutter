@@ -7,12 +7,7 @@ import 'package:jogodepalavras/view/LetterHolders.dart';
 class AppImportantData {
   static final AppImportantData _appData = AppImportantData._internal();
 
-  late TextEditingController _frstLetterController;
-  late TextEditingController _scndLetterController;
-  late TextEditingController _thrdLetterController;
-  late TextEditingController _frthLetterController;
-  late TextEditingController _fifthLetterController;
-  late List<List<TextEditingController>> lettersController;
+  late List<List<TextEditingController>> _lettersController;
   late int _focus;
   late List<String> _allWords;
   late String _secretWord;
@@ -27,11 +22,11 @@ class AppImportantData {
   ];
   List<ValueNotifier<int>> lineSetListener = [
     ValueNotifier<int>(1),
-    ValueNotifier<int>(0),
-    ValueNotifier<int>(0),
-    ValueNotifier<int>(0),
-    ValueNotifier<int>(0),
-    ValueNotifier<int>(0)
+    ValueNotifier<int>(1),
+    ValueNotifier<int>(1),
+    ValueNotifier<int>(1),
+    ValueNotifier<int>(1),
+    ValueNotifier<int>(1)
   ];
 
   factory AppImportantData() {
@@ -40,12 +35,7 @@ class AppImportantData {
 
   AppImportantData._internal() {
     getAllWords();
-    _frstLetterController = TextEditingController();
-    _scndLetterController = TextEditingController();
-    _thrdLetterController = TextEditingController();
-    _frthLetterController = TextEditingController();
-    _fifthLetterController = TextEditingController();
-    lettersController = [
+    _lettersController = [
       [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController()],
       [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController()],
       [TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController(),TextEditingController()],
@@ -56,24 +46,8 @@ class AppImportantData {
     _focus = 1;
   }
 
-  void setFrstLetterController(String controller) {
-    _frstLetterController.text = controller;
-  }
-
-  void setScndLetterController(String controller) {
-    _scndLetterController.text = controller;
-  }
-
-  void setThrdLetterController(String controller) {
-    _thrdLetterController.text = controller;
-  }
-
-  void setFrthLetterController(String controller) {
-    _frthLetterController.text = controller;
-  }
-
-  void setFifthLetterController(String controller) {
-    _fifthLetterController.text = controller;
+  void setLettersController(int line, int letter, String text) {
+    _lettersController[line][letter].text = text;
   }
 
   void setFocus(int focus) {
@@ -92,24 +66,8 @@ class AppImportantData {
     print(_secretWord);
   }
 
-  TextEditingController getFrstLetterController() {
-    return _frstLetterController;
-  }
-
-  TextEditingController getScndLetterController() {
-    return _scndLetterController;
-  }
-
-  TextEditingController getThrdLetterController() {
-    return _thrdLetterController;
-  }
-
-  TextEditingController getFrthLetterController() {
-    return _frthLetterController;
-  }
-
-  TextEditingController getFifthLetterController() {
-    return _fifthLetterController;
+  TextEditingController getLettersController(int line, int letter) {
+    return _lettersController[line][letter];
   }
 
   int getFocus() {
@@ -132,7 +90,7 @@ class AppImportantData {
 
   void compareWords() {
     List<String> result = [];
-    _secretWord = "jarro";
+    _secretWord = "ruína";
     Map<String, int> secretWordMap = {};
     Map<String, int> wordMap = {};
     _secretWord.split('').forEach((element) {
@@ -159,25 +117,20 @@ class AppImportantData {
     print(_word);
 
     setLetterHolderColors(result);
+    setFinalWord();
     lineSetListener[tryCounter-1].value++;
-    print('colorChange[${tryCounter-1}]: ${lineSetListener[tryCounter - 1].value}');
     if(tryCounter < 6) {
       _focus = 1;
-      setStartOfLine();
-      lineSetListener[tryCounter].value++;
-      lettersController[0][0].text = "olá";
-      print(' lettersController: $lettersController');
-      print('colorChange[${tryCounter}]: ${lineSetListener[tryCounter].value}');
       tryCounter++;
     }
   }
-  void setStartOfLine() {
-    _frstLetterController.text = "";
-    _scndLetterController.text = "";
-    _thrdLetterController.text = "";
-    _frthLetterController.text = "";
-    _fifthLetterController.text = "";
+
+  void setFinalWord() {
+    for (int i = 0; i < 5; i++) {
+      _lettersController[tryCounter - 1][i].text = _word[i].toUpperCase();
+    }
   }
+
   void setLetterHolderColors(List<String> newColors) {
     for (int i = 0; i < letterHolderColors.length; i++) {
       switch (newColors[i]) {
@@ -203,17 +156,34 @@ class AppImportantData {
     return counter;
   }
 
-  List<String> accentRemove() {
-    List<String> str = [];
+  String removeAccent(String word) {
+    String str = word;
+    var withAccent =
+        'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
+    var withoutAccent =
+        'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
+      for (int i = 0; i < withAccent.length; i++) {
+        str = str.replaceAll(withAccent[i], withoutAccent[i]);
+      }
+    return str;
+  }
+
+  String checkWord(String word) {
+    String test = "";
+    String result = "";
     var withAccent =
         'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
     var withoutAccent =
         'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
     for (int j = 0; j < _allWords.length; j++) {
+      if(result != "") break;
       for (int i = 0; i < withAccent.length; i++) {
-        str.add(_allWords[j].replaceAll(withAccent[i], withoutAccent[i]));
+        test = _allWords[j].replaceAll(withAccent[i], withoutAccent[i]);
+        if (test == word) {
+          result = _allWords[j];
+        }
       }
     }
-    return str;
+    return result;
   }
 }

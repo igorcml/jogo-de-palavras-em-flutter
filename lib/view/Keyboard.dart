@@ -118,15 +118,15 @@ class _KeyboardState extends State<Keyboard> {
   void changeLetter(int focus, String key) {
     switch (focus) {
       case 1:
-        AppImportantData().setFrstLetterController(key);
+        AppImportantData().setLettersController(AppImportantData().tryCounter-1, 0, key);
       case 2:
-        AppImportantData().setScndLetterController(key);
+        AppImportantData().setLettersController(AppImportantData().tryCounter-1, 1, key);
       case 3:
-        AppImportantData().setThrdLetterController(key);
+        AppImportantData().setLettersController(AppImportantData().tryCounter-1, 2, key);
       case 4:
-        AppImportantData().setFrthLetterController(key);
+        AppImportantData().setLettersController(AppImportantData().tryCounter-1, 3, key);
       case 5:
-        AppImportantData().setFifthLetterController(key);
+        AppImportantData().setLettersController(AppImportantData().tryCounter-1, 4, key);
       default:
         print("not on any letter");
     }
@@ -136,11 +136,13 @@ class _KeyboardState extends State<Keyboard> {
     //logic to backspace button
     if (key == '⌫') {
       if (_focus > 0) {
-        if (_focus == 5 && AppImportantData().getFifthLetterController().text == "") {
+        // if (_focus == 5 && AppImportantData().getFifthLetterController().text == "") {
+        if (_focus == 5 && AppImportantData().getLettersController(AppImportantData().tryCounter-1, 4).text == "") {
           AppImportantData().setFocus(--_focus);
           _focus = AppImportantData().getFocus();
           changeLetter(_focus, "");
-        } else if (_focus == 5 && AppImportantData().getFifthLetterController().text != "") {
+        // } else if (_focus == 5 && AppImportantData().getFifthLetterController().text != "") {
+        } else if (_focus == 5 && AppImportantData().getLettersController(AppImportantData().tryCounter-1, 4).text != "") {
           changeLetter(_focus, "");
         } else {
           if (_focus != 1) {
@@ -152,15 +154,15 @@ class _KeyboardState extends State<Keyboard> {
       }
 
     } else if(key == "IR") {
-      String word = (AppImportantData().getFrstLetterController().text +
-          AppImportantData().getScndLetterController().text +
-          AppImportantData().getThrdLetterController().text +
-          AppImportantData().getFrthLetterController().text +
-          AppImportantData().getFifthLetterController().text).toLowerCase();
-      if(word.length != 5){
-        showAlertDialog(context, "Palavra precisa ter cinco letras.");
-      } else if (!AppImportantData().accentRemove().contains(word)) {
-        showAlertDialog(context, "Palavra não existe no dicionário.");
+      String word = (
+          AppImportantData().getLettersController(AppImportantData().tryCounter-1, 0).text.toLowerCase() +
+          AppImportantData().getLettersController(AppImportantData().tryCounter-1, 1).text.toLowerCase() +
+          AppImportantData().getLettersController(AppImportantData().tryCounter-1, 2).text.toLowerCase() +
+          AppImportantData().getLettersController(AppImportantData().tryCounter-1, 3).text.toLowerCase() +
+          AppImportantData().getLettersController(AppImportantData().tryCounter-1, 4).text.toLowerCase());
+      word = AppImportantData().checkWord(word);
+      if (AppImportantData().checkWord(word) == "") {
+        showAlertDialog(context, "Palavra inválida, tente novamente!.");
       } else {
         AppImportantData().setWord(word);
         AppImportantData().compareWords();

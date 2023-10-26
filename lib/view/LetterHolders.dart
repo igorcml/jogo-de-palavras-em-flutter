@@ -88,22 +88,12 @@ class _LetterHoldersState extends State<LetterHolders> {
             listenable: _counterValueNotifier[0],
             builder: (BuildContext context, Widget? child) {
               return _buildLine(
-                _counterValueNotifier[0].value == 1
-                    ? AppImportantData().getFrstLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[0].value == 1
-                    ? AppImportantData().getScndLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[0].value == 1
-                    ? AppImportantData().getThrdLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[0].value == 1
-                    ? AppImportantData().getFrthLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[0].value == 1
-                    ? AppImportantData().getFifthLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[0].value == 2
+                AppImportantData().getLettersController(0, 0),
+                AppImportantData().getLettersController(0, 1),
+                AppImportantData().getLettersController(0, 2),
+                AppImportantData().getLettersController(0, 3),
+                AppImportantData().getLettersController(0, 4),
+                 _counterValueNotifier[0].value == 2
                     ? AppImportantData().letterHolderColors[0]
                     : Colors.black26,
                 _counterValueNotifier[0].value == 2
@@ -127,21 +117,11 @@ class _LetterHoldersState extends State<LetterHolders> {
             listenable: _counterValueNotifier[1],
             builder: (BuildContext context, Widget? child) {
               return _buildLine(
-                _counterValueNotifier[1].value == 1
-                    ? AppImportantData().getFrstLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[1].value == 1
-                    ? AppImportantData().getScndLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[1].value == 1
-                    ? AppImportantData().getThrdLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[1].value == 1
-                    ? AppImportantData().getFrthLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[1].value == 1
-                    ? AppImportantData().getFifthLetterController()
-                    : TextEditingController(),
+                AppImportantData().getLettersController(1, 0),
+                AppImportantData().getLettersController(1, 1),
+                AppImportantData().getLettersController(1, 2),
+                AppImportantData().getLettersController(1, 3),
+                AppImportantData().getLettersController(1, 4),
                 _counterValueNotifier[1].value == 2
                     ? AppImportantData().letterHolderColors[0]
                     : Colors.black26,
@@ -166,21 +146,11 @@ class _LetterHoldersState extends State<LetterHolders> {
             listenable: _counterValueNotifier[2],
             builder: (BuildContext context, Widget? child) {
               return _buildLine(
-                _counterValueNotifier[2].value == 1
-                    ? AppImportantData().getFrstLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[2].value == 1
-                    ? AppImportantData().getScndLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[2].value == 1
-                    ? AppImportantData().getThrdLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[2].value == 1
-                    ? AppImportantData().getFrthLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[2].value == 1
-                    ? AppImportantData().getFifthLetterController()
-                    : TextEditingController(),
+                AppImportantData().getLettersController(2, 0),
+                AppImportantData().getLettersController(2, 1),
+                AppImportantData().getLettersController(2, 2),
+                AppImportantData().getLettersController(2, 3),
+                AppImportantData().getLettersController(2, 4),
                 _counterValueNotifier[2].value == 2
                     ? AppImportantData().letterHolderColors[0]
                     : Colors.black26,
@@ -205,21 +175,11 @@ class _LetterHoldersState extends State<LetterHolders> {
             listenable: _counterValueNotifier[3],
             builder: (BuildContext context, Widget? child) {
               return _buildLine(
-                _counterValueNotifier[3].value == 1
-                    ? AppImportantData().getFrstLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[3].value == 1
-                    ? AppImportantData().getScndLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[3].value == 1
-                    ? AppImportantData().getThrdLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[3].value == 1
-                    ? AppImportantData().getFrthLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[3].value == 1
-                    ? AppImportantData().getFifthLetterController()
-                    : TextEditingController(),
+                AppImportantData().getLettersController(3, 0),
+                AppImportantData().getLettersController(3, 1),
+                AppImportantData().getLettersController(3, 2),
+                AppImportantData().getLettersController(3, 3),
+                AppImportantData().getLettersController(3, 4),
                 _counterValueNotifier[3].value == 2
                     ? AppImportantData().letterHolderColors[0]
                     : Colors.black26,
@@ -244,21 +204,11 @@ class _LetterHoldersState extends State<LetterHolders> {
             listenable: _counterValueNotifier[4],
             builder: (BuildContext context, Widget? child) {
               return _buildLine(
-                _counterValueNotifier[4].value == 1
-                    ? AppImportantData().getFrstLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[4].value == 1
-                    ? AppImportantData().getScndLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[4].value == 1
-                    ? AppImportantData().getThrdLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[4].value == 1
-                    ? AppImportantData().getFrthLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[4].value == 1
-                    ? AppImportantData().getFifthLetterController()
-                    : TextEditingController(),
+                AppImportantData().getLettersController(4, 0),
+                AppImportantData().getLettersController(4, 1),
+                AppImportantData().getLettersController(4, 2),
+                AppImportantData().getLettersController(4, 3),
+                AppImportantData().getLettersController(4, 4),
                 _counterValueNotifier[4].value == 2
                     ? AppImportantData().letterHolderColors[0]
                     : Colors.black26,
@@ -283,21 +233,11 @@ class _LetterHoldersState extends State<LetterHolders> {
             listenable: _counterValueNotifier[5],
             builder: (BuildContext context, Widget? child) {
               return _buildLine(
-                _counterValueNotifier[5].value == 1
-                    ? AppImportantData().getFrstLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[5].value == 1
-                    ? AppImportantData().getScndLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[5].value == 1
-                    ? AppImportantData().getThrdLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[5].value == 1
-                    ? AppImportantData().getFrthLetterController()
-                    : TextEditingController(),
-                _counterValueNotifier[5].value == 1
-                    ? AppImportantData().getFifthLetterController()
-                    : TextEditingController(),
+               AppImportantData().getLettersController(5, 0),
+               AppImportantData().getLettersController(5, 1),
+               AppImportantData().getLettersController(5, 2),
+               AppImportantData().getLettersController(5, 3),
+               AppImportantData().getLettersController(5, 4),
                 _counterValueNotifier[5].value == 2
                     ? AppImportantData().letterHolderColors[0]
                     : Colors.black26,
